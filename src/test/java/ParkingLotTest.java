@@ -1,8 +1,7 @@
 import org.junit.jupiter.api.Test;
 import parking.ParkingLot;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ParkingLotTest {
 
@@ -11,10 +10,10 @@ public class ParkingLotTest {
         Vehicle car = new Vehicle();
         ParkingLot parkingLot = new ParkingLot(2);
 
-        boolean isParked = parkingLot.park(car);
+        parkingLot.park(car);
+        boolean isParked = parkingLot.isCarParked(car);
 
         assertTrue(isParked);
-
     }
 
     @Test
@@ -22,10 +21,11 @@ public class ParkingLotTest {
         Vehicle car1 = new Vehicle();
         Vehicle car2 = new Vehicle();
         ParkingLot parkingLot = new ParkingLot(1);
+        parkingLot.park(car1);
+        parkingLot.park(car2);
 
-        boolean isParked = parkingLot.park(car1);
 
-        isParked = parkingLot.park(car2);
+        boolean isParked = parkingLot.isCarParked(car2);
 
         assertFalse(isParked);
     }
@@ -36,10 +36,10 @@ public class ParkingLotTest {
         Vehicle car2 = new Vehicle();
         ParkingLot parkingLot = new ParkingLot(4);
 
-        boolean isFirstCarParked = parkingLot.park(car1);
-        assertTrue(isFirstCarParked);
-        boolean isSecondCarParked = parkingLot.park(car2);
-        assertTrue(isSecondCarParked);
+        parkingLot.park(car1);
+        assertTrue(parkingLot.isCarParked(car1));
+         parkingLot.park(car2);
+        assertTrue(parkingLot.isCarParked(car2));
     }
 
     @Test
@@ -53,7 +53,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void checkDriverShouldBeAbleToUnParkTheVehicleIs(){
+    public void checkDriverShouldBeAbleToUnParkTheVehicleIs() {
         ParkingLot parkingLot = new ParkingLot(4);
         Vehicle car = new Vehicle();
 
@@ -62,5 +62,16 @@ public class ParkingLotTest {
 
         boolean isVehicleParked = parkingLot.isCarParked(car);
         assertFalse(isVehicleParked);
+    }
+
+    @Test
+    public void checkParkingFullStatus() {
+        ParkingLot parkingLot = new ParkingLot(1);
+        Vehicle car = new Vehicle();
+
+        parkingLot.park(car);
+
+        String parkingStatus = parkingLot.getParkingLotStatus();
+        assertEquals(parkingStatus, "Full");
     }
 }

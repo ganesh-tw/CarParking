@@ -7,18 +7,21 @@ public class ParkingLot {
     private int availableSlots;
     private final HashSet<Parkable> parkedVehicles = new HashSet<Parkable>();
 
+    private String parkingLotStatus = "Vacant";
+
     public ParkingLot(int capacity) {
         this.capacity = capacity;
         this.availableSlots = capacity;
     }
 
-    public boolean park(Parkable vehicle) {
+    public void park(Parkable vehicle) {
         if (availableSlots > 0) {
             availableSlots--;
             parkedVehicles.add(vehicle);
-            return true;
+            if (availableSlots == 0) {
+                this.updateParkingLotStatus("Full");
+            }
         }
-        return false;
     }
 
     public boolean isCarParked(Parkable vehicle) {
@@ -26,10 +29,21 @@ public class ParkingLot {
     }
 
     public void unPark(Parkable vehicle) {
-        parkedVehicles.remove(vehicle);
-        availableSlots++;
+        if (isCarParked(vehicle)) {
+            parkedVehicles.remove(vehicle);
+            availableSlots++;
+        }
+
         if (parkedVehicles.isEmpty()) {
             availableSlots = this.capacity;
         }
+    }
+
+    private void updateParkingLotStatus(String status) {
+        this.parkingLotStatus = status;
+    }
+
+    public String getParkingLotStatus(){
+        return this.parkingLotStatus;
     }
 }
