@@ -1,7 +1,7 @@
 package parking;
 
 public class ParkingLot {
-    int capacity;
+    private int capacity;
 
     public ParkingLot(int capacity) {
         this.capacity = capacity;
