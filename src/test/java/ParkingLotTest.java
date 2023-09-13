@@ -25,4 +25,15 @@ public class ParkingLotTest {
 
         assertFalse(isParked);
     }
+
+    @Test
+    public void checkIfMultipleCarsAreAllowedToParkInParkingLot(){
+        ParkingLot parkingLot = new ParkingLot(4);
+
+        boolean isFirstCarParked = parkingLot.park();
+        assertTrue(isFirstCarParked);
+        boolean isSecondCarParked = parkingLot.park();
+        assertTrue(isSecondCarParked);
+
+    }
 }
