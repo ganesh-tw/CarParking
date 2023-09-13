@@ -8,10 +8,10 @@ public class ParkingLotTest {
 
     @Test
     public void checkIfCarIsParkedInParkingLot() {
-        String carNumber = "MH-23-1111";
+        Vehicle car = new Vehicle();
         ParkingLot parkingLot = new ParkingLot(2);
 
-        boolean isParked = parkingLot.park(carNumber);
+        boolean isParked = parkingLot.park(car);
 
         assertTrue(isParked);
 
@@ -19,48 +19,48 @@ public class ParkingLotTest {
 
     @Test
     public void checkIfCarIsParkingFullAndFailedToPark() {
-        String carNumber1 = "MH-23-1111";
-        String carNumber2 = "MH-23-1112";
+        Vehicle car1 = new Vehicle();
+        Vehicle car2 = new Vehicle();
         ParkingLot parkingLot = new ParkingLot(1);
 
-        boolean isParked = parkingLot.park(carNumber1);
+        boolean isParked = parkingLot.park(car1);
 
-        isParked = parkingLot.park(carNumber2);
+        isParked = parkingLot.park(car2);
 
         assertFalse(isParked);
     }
 
     @Test
     public void checkIfMultipleCarsAreAllowedToParkInParkingLot(){
-        String carNumber1 = "MH-23-1111";
-        String carNumber2 = "MH-23-1112";
+        Vehicle car1 = new Vehicle();
+        Vehicle car2 = new Vehicle();
         ParkingLot parkingLot = new ParkingLot(4);
 
-        boolean isFirstCarParked = parkingLot.park(carNumber1);
+        boolean isFirstCarParked = parkingLot.park(car1);
         assertTrue(isFirstCarParked);
-        boolean isSecondCarParked = parkingLot.park(carNumber2);
+        boolean isSecondCarParked = parkingLot.park(car2);
         assertTrue(isSecondCarParked);
     }
 
     @Test
     public void checkIfVehicleIsParked(){
         ParkingLot parkingLot = new ParkingLot(4);
-        String carNumber1 = "MH-23-1111";
-        parkingLot.park(carNumber1);
+        Vehicle car = new Vehicle();
+        parkingLot.park(car);
 
-        boolean isVehicleParked = parkingLot.isCarParked(carNumber1);
+        boolean isVehicleParked = parkingLot.isCarParked(car);
         assertTrue(isVehicleParked);
     }
 
     @Test
     public void checkDriverShouldBeAbleToUnParkTheVehicleIs(){
         ParkingLot parkingLot = new ParkingLot(4);
-        String carNumber1 = "MH-23-1111";
+        Vehicle car = new Vehicle();
 
-        parkingLot.park(carNumber1);
-        parkingLot.unPark(carNumber1);
+        parkingLot.park(car);
+        parkingLot.unPark(car);
 
-        boolean isVehicleParked = parkingLot.isCarParked(carNumber1);
+        boolean isVehicleParked = parkingLot.isCarParked(car);
         assertFalse(isVehicleParked);
     }
 }
