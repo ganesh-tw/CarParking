@@ -1,15 +1,15 @@
 package parking;
 
 public class ParkingLot {
-    int parkingSpaceCount;
+    int capacity;
 
-    public ParkingLot(int parkingSpaceCount) {
-        this.parkingSpaceCount = parkingSpaceCount;
+    public ParkingLot(int capacity) {
+        this.capacity = capacity;
     }
 
     public boolean park() {
-        if (parkingSpaceCount>0) {
-            parkingSpaceCount--;
+        if (capacity > 0) {
+            capacity--;
             return true;
         }
         return false;

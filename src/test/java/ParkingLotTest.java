@@ -12,6 +12,7 @@ public class ParkingLotTest {
         boolean isParked = parkingLot.park();
 
         assertTrue(isParked);
+
     }
 
     @Test
