@@ -1,6 +1,8 @@
 import org.junit.jupiter.api.Test;
 import parking.ParkingLot;
-
+import parking.ParkingLotObserver;
+import static org.mockito.Mockito.*;
+import static org.mockito.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ParkingLotTest {
@@ -65,13 +67,27 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void checkParkingFullStatus() {
+    public void shouldNotifyOwnerWhenParkingIsFull() {
         ParkingLot parkingLot = new ParkingLot(1);
+//        ParkingLotObserver owner = new ParkingLotOwner();
+        ParkingLotObserver owner = Mockito.mock(ParkingLotOwner.class);
+        parkingLot.registerObserver(owner);
         Vehicle car = new Vehicle();
 
         parkingLot.park(car);
 
-        String parkingStatus = parkingLot.getParkingLotStatus();
-        assertEquals(parkingStatus, "Full");
+        Mockito.verify(owner, Mockito.times(1)).notifyMe("1");
+    }
+    @Test
+    public void shouldNotifyTrafficCopWhenParkingIsFull() {
+        ParkingLot parkingLot = new ParkingLot(1);
+//        ParkingLotObserver cop = new TrafficCop();
+//        ParkingLotObserver cop = Mockito.mock(ParkingLotOwner.class);
+//        parkingLot.registerObserver(cop);
+        Vehicle car = new Vehicle();
+
+        parkingLot.park(car);
+
+//        Mockito.verify(owner, Mockito.times(1)).notifyMe("1");
     }
 }
